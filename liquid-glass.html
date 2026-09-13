@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adaptive Liquid Glass — JM Velez</title>
+<meta name="description" content="A UI concept that holds Apple's Liquid Glass interface to WCAG contrast minimums by adapting to the wallpaper and the surrounding light.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="shell masthead-inner">
+    <a class="wordmark" href="index.html">JM Velez</a>
+    <nav>
+      <a href="index.html#writing">Writing &amp; editing</a>
+      <a href="index.html#product">Product &amp; UX</a>
+      <a href="index.html#visual">Visual &amp; multimedia</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="narrow case-hero">
+  <p class="kicker">Product &amp; UX · Northeastern University, 2026</p>
+  <h1>Adaptive Liquid Glass</h1>
+  <!--<p class="standfirst">Apple shipped an interface that becomes unreadable in sunlight.
+     Rather than replace it, we made it respond to where you are.</p>-->
+
+  <dl class="facts">
+    <div><dt>Role</dt><dd>Research, concept, prototype</dd></div>
+    <div><dt>Team</dt><dd>J. M. Velez, Harsh Kumar and Sujan Pokhrel, as “Team Apple”</dd></div>
+    <div><dt>Tools</dt><dd>Figma, WCAG contrast checkers</dd></div>
+    <div><dt>Output</dt><dd>26-screen interactive prototype</dd></div>
+  </dl>
+</section>
+
+<article class="narrow case-body">
+
+  <h2>The problem</h2>
+
+  <h3>UNDER CONSTRUCTION</h3>
+  <!--<p>Liquid Glass renders interface chrome as translucent, refractive panels layered over
+     whatever is behind them. It looks striking in a keynote, where the wallpaper is
+     chosen to flatter it. In use, the wallpaper is a photo of somebody's dog, and the
+     room is full of afternoon sun.</p>-->
+  <p>"Team Apple" approached the project from three directions: public and reviewer reaction to the
+     release; the revisions Apple itself shipped in subsequent point updates; and our own
+     measurements of the UI shipped against WCAG 2.2. The complaints clustered, and they
+     were not about taste. Text over bright or busy backgrounds fell below the 4.5:1
+     contrast ratio that WCAG 2.2 AA requires for body text, and the failure was worst
+     exactly where phones get used most — outdoors.</p>
+  <p>Apple's own hotfixes were instructive. They increased opacity in specific
+     components, which read as an admission that the problem is real, and as a
+     concession that the fix so far has been piecemeal rather than systemic.</p>
+
+  <h2>Who it fails</h2>
+  <p>Low contrast is an inconvenience for most people and a barrier for some. We scoped
+     to four groups: users with low vision, users in high-glare environments, older users,
+     and users who simply wanted more control over how their device looks.</p>
+
+  <h2>The decision that shaped everything</h2>
+  <p>The obvious fix is to turn the translucency down. Make the panels opaque, contrast
+     goes up, problem solved.</p>
+  <p>We rejected it. A uniform fix throws away the aesthetic entirely, which defeats the
+     purpose of a refresh, and it fails the same way the original does — by assuming one
+     setting works everywhere. Liquid Glass is not broken in a dim room over a plain
+     wallpaper. It is broken in direct sunlight over a photograph.</p>
+  <blockquote>So the system should not have one appearance. It should have a contrast
+     target, and adjust its appearance to hit it.</blockquote>
+
+  <h2>How it works</h2>
+
+  <div class="screens">
+    <figure>
+      <img src="images/lg-analysis.png" alt="Two prototype screens: one sampling wallpaper brightness, contrast, colour complexity and luminance variance; one classifying ambient light into indoor, outdoor, direct sunlight and low light">
+      <figcaption>Detection: The system samples wallpaper pixels beneath each UI element
+        and reads the ambient light sensor, classifying the surroundings into four
+        modes. In this state it has found an 80,000-lux reading and a psychedelic
+        gradient wallpaper, close to a worst case.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/lg-decision-engine.png" alt="Prototype screen showing a decision engine taking brightness, complexity and environment as inputs and outputting blur, opacity, saturation and tint values">
+      <figcaption>Decision: Brightness, colour complexity and environment were the three
+        inputs that moved readability most in testing, so those are what the engine
+        weighs. It outputs four glass parameters, on-device, in a single frame at
+        60fps.</figcaption>
+    </figure>
+  </div>
+
+  <p>Tuning four parameters together rather than one is what preserves the look. Raising
+     opacity alone produces flat grey panels. Raising opacity while lifting saturation and
+     shifting tint keeps the glass reading as glass.</p>
+
+  <div class="screens">
+    <figure>
+      <img src="images/lg-after.png" alt="Lock screen with Adaptive Liquid Glass active over a colourful wallpaper, showing a 4.5:1 WCAG AA pass indicator">
+      <figcaption>Result over a wallpaper that defeats the shipping UI: legible
+        notifications, diffusion intact, 4.5:1 met.</figcaption>
+    </figure>
+    <figure>
+      <img src="images/lg-accessibility.png" alt="Accessibility settings screen showing larger text, bold text, increased contrast and reduce motion, with glass contrast raised to 5.2:1">
+      <figcaption>Accessibility preferences can be used to not just restyle the UI, but 
+        move the engine's target to accommodate different users' needs. With low-vision settings on, 
+        contrast is held at 5.2:1, well past AAA.</figcaption>
+    </figure>
+  </div>
+
+  <h2>What we kept</h2>
+
+  <p>Fonts and icons are untouched from Liquid Glass 1.0. The diffusion effect that
+     defines the material stays. The engine darkens backgrounds and cuts reflectiveness
+     only as far as compliance requires, and no further. A user who never opens Settings
+     gets an interface that looks like the one Apple shipped and reads in daylight; a user
+     who wants to push contrast to 7:1 can.</p>
+
+  <div class="plate">
+    <img src="images/lg-legibility.png" alt="Prototype overview screen summarising the four components of Adaptive Legibility">
+    <figcaption>The feature as a user would first meet it, in the onboarding flow.</figcaption>
+  </div>
+
+  <h2>Reflection</h2>
+  
+  <h3>UNDER CONSTRUCTION</h3>
+  <!--<p>TODO: replace this with your own reflection — see my note. 
+     This section is yours to write. Hiring managers read it more closely than any other
+     part of a case study, because it is the only part that cannot be bluffed. Two or
+     three sentences: what the concept has not proven yet, and what you would test first
+     if the project continued. An honest limitation here is worth more than another
+     paragraph of features.</p>-->
+
+  <div class="case-cta">
+
+    <a href="https://www.figma.com/make/oMqCuIGtOUbEpl6fN7qMXN/Apple-style-UX-Prototype?code-node-id=0-9&p=f&t=TmjlKwCP0Edwj5nU-0&fullscreen=1">Open the interactive prototype</a>
+    <a href="index.html#product">Back to work</a>
+  </div>
+</article>
+
+<section class="narrow case-foot">
+  <p>Next: <a href="dont-forget-to-smile.html">Don't Forget to Smile!</a></p>
+</section>
+
+</main>
+
+<footer class="shell">
+  <p>© 2026 JM Velez</p>
+</footer>
+
+</body>
+</html>
